@@ -8,13 +8,11 @@ public class Card : MonoBehaviour
     [SerializeField] private string suit;
     [SerializeField] private int value;
     private Material cardMat;
-    void Start()
-    {
+    void Start() {
         updateMat();
     }
 
-    public void updateMat()
-    {
+    public void updateMat() {
         string matName = "";
 
         matName += suit switch {

@@ -12,8 +12,7 @@ public class Deck : MonoBehaviour
     [SerializeField] public GameObject displayCard;
     [SerializeField] public TextMeshPro text;
 
-    public void initDeck(bool initJokers)
-    {
+    public void initDeck(bool initJokers) {
         for(int i = 0; i < 4; i++) {
 
             string s = "";
@@ -38,8 +37,7 @@ public class Deck : MonoBehaviour
         Shuffle();
     }
 
-    void Update()
-    {
+    void Update() {
         bool condition = cards.Count >= 1;
         displayCard.SetActive(condition);
         
@@ -66,5 +64,9 @@ public class Deck : MonoBehaviour
         cardData topCard = cards[0];
         cards.Remove(topCard);
         return topCard;
+    }
+
+    public void Restock() {
+
     }
 }

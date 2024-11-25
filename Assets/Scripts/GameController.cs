@@ -5,12 +5,10 @@ using UnityEngine;
 
 public struct cardData {
     public string suit; public int value;
-
     public cardData(string s, int v) {
         suit = s;
         value = v;
     }
-
     public string getSuit() { return suit; }
     public int getValue() { return value; }
 }
@@ -28,8 +26,7 @@ public class GameController : MonoBehaviour
     private Queue<cardData> pileCards = new Queue<cardData>();
     private GameState state;
 
-    void Start()
-    {
+    void Start() {
         state = GameState.Start;
         Deck = GameObject.Find("Deck");
         Pile = GameObject.Find("Pile");
@@ -55,29 +52,29 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void PlayerDraw()
-    {
+    void PlayerDraw() {
         cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
         playerHand.Add(topCard);
         Player.GetComponent<Hand>().addCard(topCard.getSuit(), topCard.getValue());
     }
 
-    void BotDraw()
-    {
+    void BotDraw() {
         cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
         botHand.Add(topCard);
         Bot.GetComponent<Hand>().addCard("Back", 0);
     }
 
-    void deckToPile()
-    {
+    void deckToPile() {
         pileCards.Enqueue(Deck.GetComponent<Deck>().drawTopCard());
         cardData topCard = pileCards.Peek();
         Pile.GetComponent<Pile>().updateDisplay(topCard.getSuit(), topCard.getValue());
     }
 
-    void PlayersTurn()
-    {
+    void PlayersTurn() {
         if(state != GameState.PlayersTurn) return;
+    }
+
+    void BotsTurn() {
+        if(state != GameState.BotsTurn) return;
     }
 }

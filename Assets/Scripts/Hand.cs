@@ -8,8 +8,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private List<GameObject> cards = new List<GameObject>();
     [SerializeField] public float sizeToFill;
 
-    void Update()
-    {
+    void Update() {
         float startPoint = (-sizeToFill + 0.5f) / 2;
         float placeAmount = sizeToFill / cards.Count;
 
@@ -22,8 +21,7 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void addCard(string s, int v)
-    {
+    public void addCard(string s, int v) {
         GameObject newCard = Instantiate(cardPrefab, transform);
         newCard.GetComponent<Card>().setSuit(s);
         newCard.GetComponent<Card>().setValue(v);
