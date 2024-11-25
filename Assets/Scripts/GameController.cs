@@ -21,6 +21,9 @@ public class GameController : MonoBehaviour
     [SerializeField] public GameObject Bot;
     [SerializeField] public GameObject Pile;
     private List<cardData> playerHand = new List<cardData>();
+    private List<cardData> botHand = new List<cardData>();
+
+    bool finised = false;
 
     void Start()
     {
@@ -30,6 +33,10 @@ public class GameController : MonoBehaviour
         Bot = GameObject.Find("BotHand");
 
         Deck.GetComponent<Deck>().initDeck(false);
+        for(int i = 0; i < 7; i++) {
+            PlayerDraw();
+            BotDraw();
+        }
     }
 
     // Update is called once per frame
@@ -37,4 +44,7 @@ public class GameController : MonoBehaviour
     {
         
     }
+
+    void PlayerDraw(){ playerHand.Add(Deck.GetComponent<Deck>().drawTopCard()); }
+    void BotDraw(){ botHand.Add(Deck.GetComponent<Deck>().drawTopCard()); }
 }

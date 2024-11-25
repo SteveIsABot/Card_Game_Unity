@@ -61,4 +61,10 @@ public class Deck : MonoBehaviour
             cards[indexB] = temp;
         }
     }
+
+    public cardData drawTopCard() {
+        cardData topCard = cards[0];
+        cards.Remove(topCard);
+        return topCard;
+    }
 }
