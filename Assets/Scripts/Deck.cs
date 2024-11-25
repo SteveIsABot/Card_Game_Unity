@@ -66,7 +66,13 @@ public class Deck : MonoBehaviour
         return topCard;
     }
 
-    public void Restock() {
+    public void Restock(Stack<cardData> pileCards) {
+        
+        cardData topCard = pileCards.Pop();
+        while(pileCards.Count > 0) cards.Add(pileCards.Pop());
+        Shuffle();
 
+        pileCards.Push(topCard);
+        Debug.Log(pileCards.Count);
     }
 }
