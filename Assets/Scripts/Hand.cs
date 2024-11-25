@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Hand : MonoBehaviour
 {
     [SerializeField] private List<GameObject> cards = new List<GameObject>();
     [SerializeField] public float sizeToFill;
