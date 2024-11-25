@@ -344,10 +344,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Deck
       objectReference: {fileID: 0}
-    - target: {fileID: 1687898029387177862, guid: 83dada1cfa9201e4fbcf585a17745e32, type: 3}
-      propertyPath: initJokers
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1687898029387177863, guid: 83dada1cfa9201e4fbcf585a17745e32, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -390,6 +386,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1687898029387177863, guid: 83dada1cfa9201e4fbcf585a17745e32, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687898030228782035, guid: 83dada1cfa9201e4fbcf585a17745e32, type: 3}
+      propertyPath: suit
+      value: Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687898030228782035, guid: 83dada1cfa9201e4fbcf585a17745e32, type: 3}
+      propertyPath: value
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
