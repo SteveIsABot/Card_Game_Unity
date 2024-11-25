@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public struct cardData {
@@ -14,6 +15,8 @@ public struct cardData {
     public int getValue() { return value; }
 }
 
+public enum GameState { Start, PlayersTurn, BotsTurn, Win, Lose }
+
 public class GameController : MonoBehaviour
 {
     [SerializeField] public GameObject Deck;
@@ -23,28 +26,33 @@ public class GameController : MonoBehaviour
     private List<cardData> playerHand = new List<cardData>();
     private List<cardData> botHand = new List<cardData>();
     private Queue<cardData> pileCards = new Queue<cardData>();
-
-    //bool finised = false;
+    private GameState state;
 
     void Start()
     {
+        state = GameState.Start;
         Deck = GameObject.Find("Deck");
         Pile = GameObject.Find("Pile");
         Player = GameObject.Find("PlayerHand");
         Bot = GameObject.Find("BotHand");
 
+        Random.InitState((int)System.DateTime.Now.Ticks);
         Deck.GetComponent<Deck>().initDeck(false);
+
         for(int i = 0; i < 7; i++) {
             PlayerDraw();
             BotDraw();
         }
 
         deckToPile();
-    }
 
-    void Update()
-    {
-        
+        if(Random.Range(1, 100) % 2 == 1) {
+            state = GameState.PlayersTurn;
+            //PlayersTurn();
+        } else {
+            state = GameState.BotsTurn;
+            //BotsTurn();
+        }
     }
 
     void PlayerDraw()
@@ -66,5 +74,10 @@ public class GameController : MonoBehaviour
         pileCards.Enqueue(Deck.GetComponent<Deck>().drawTopCard());
         cardData topCard = pileCards.Peek();
         Pile.GetComponent<Pile>().updateDisplay(topCard.getSuit(), topCard.getValue());
+    }
+
+    void PlayersTurn()
+    {
+        if(state != GameState.PlayersTurn) return;
     }
 }

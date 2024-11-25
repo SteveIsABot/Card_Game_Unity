@@ -24,7 +24,7 @@ public class Hand : MonoBehaviour
 
     public void addCard(string s, int v)
     {
-        GameObject newCard = Instantiate(cardPrefab);
+        GameObject newCard = Instantiate(cardPrefab, transform);
         newCard.GetComponent<Card>().setSuit(s);
         newCard.GetComponent<Card>().setValue(v);
         newCard.GetComponent<Card>().updateMat();
