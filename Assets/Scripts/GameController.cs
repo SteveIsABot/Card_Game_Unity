@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     [SerializeField] public GameObject Pile;
     private List<cardData> playerHand = new List<cardData>();
     private List<cardData> botHand = new List<cardData>();
+    private Queue<cardData> pileCards = new Queue<cardData>();
 
     //bool finised = false;
 
@@ -37,8 +38,10 @@ public class GameController : MonoBehaviour
             PlayerDraw();
             BotDraw();
         }
+
+        deckToPile();
     }
-    
+
     void Update()
     {
         
@@ -56,5 +59,12 @@ public class GameController : MonoBehaviour
         cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
         botHand.Add(topCard);
         Bot.GetComponent<Hand>().addCard("Back", 0);
+    }
+
+    void deckToPile()
+    {
+        pileCards.Enqueue(Deck.GetComponent<Deck>().drawTopCard());
+        cardData topCard = pileCards.Peek();
+        Pile.GetComponent<Pile>().updateDisplay(topCard.getSuit(), topCard.getValue());
     }
 }

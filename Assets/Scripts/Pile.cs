@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class Pile : MonoBehaviour
 {
-    private Queue<GameObject> pileCards = new Queue<GameObject>();
     [SerializeField] public GameObject display;
     void Start() {}
 
-    void Update()
+    public void updateDisplay(string s, int v)
     {
-        if(pileCards.Count > 0) {
-            Card topCard = pileCards.Peek().GetComponent<Card>();
-            display.GetComponent<Card>().setSuit(topCard.getSuit());
-            display.GetComponent<Card>().setValue(topCard.getValue());
-            display.GetComponent<Card>().updateMat();
-            display.SetActive(true);
-        } else {
-            display.SetActive(false);
-        }
+        display.GetComponent<Card>().setSuit(s);
+        display.GetComponent<Card>().setValue(v);
+        display.GetComponent<Card>().updateMat();
+        display.SetActive(true);
     }
 }
