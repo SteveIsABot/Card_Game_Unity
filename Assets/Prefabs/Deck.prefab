@@ -200,7 +200,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Remaining:
 
-    54'
+    X'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -305,7 +305,7 @@ Transform:
   - {fileID: 1687898030228782039}
   - {fileID: 1687898029366232700}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1687898029387177862
 MonoBehaviour:
@@ -321,7 +321,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayCard: {fileID: 1687898030228782034}
   text: {fileID: 1687898029366232701}
-  initJokers: 1
 --- !u!1 &1687898030228782034
 GameObject:
   m_ObjectHideFlags: 0

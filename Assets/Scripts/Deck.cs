@@ -2,19 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-
-public struct cardData {
-    public string suit; public int value;
-
-    public cardData(string s, int v) {
-        suit = s;
-        value = v;
-    }
-
-    public string getSuit() { return suit; }
-    public int getValue() { return value; }
-}
 
 public class Deck : MonoBehaviour
 {
@@ -22,9 +11,8 @@ public class Deck : MonoBehaviour
     private List<cardData> cards = new List<cardData>();
     [SerializeField] public GameObject displayCard;
     [SerializeField] public TextMeshPro text;
-    [SerializeField] public bool initJokers = false;
 
-    void Start()
+    public void initDeck(bool initJokers)
     {
         for(int i = 0; i < 4; i++) {
 
