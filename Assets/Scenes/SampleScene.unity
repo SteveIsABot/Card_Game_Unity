@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4148e330f2eb72b4cb8f9d48159ed0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 3828215396161066312, guid: 9940b67a94cb2654aae9239e65c60708, type: 3}
   cards: []
   sizeToFill: 8
   isBot: 1
@@ -540,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4148e330f2eb72b4cb8f9d48159ed0c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 3828215396161066312, guid: 9940b67a94cb2654aae9239e65c60708, type: 3}
   cards: []
   sizeToFill: 8
   isBot: 1

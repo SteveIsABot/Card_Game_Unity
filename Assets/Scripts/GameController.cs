@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
     private List<cardData> playerHand = new List<cardData>();
     private List<cardData> botHand = new List<cardData>();
 
-    bool finised = false;
+    //bool finised = false;
 
     void Start()
     {
@@ -38,13 +38,23 @@ public class GameController : MonoBehaviour
             BotDraw();
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
     }
 
-    void PlayerDraw(){ playerHand.Add(Deck.GetComponent<Deck>().drawTopCard()); }
-    void BotDraw(){ botHand.Add(Deck.GetComponent<Deck>().drawTopCard()); }
+    void PlayerDraw()
+    {
+        cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
+        playerHand.Add(topCard);
+        Player.GetComponent<Hand>().addCard(topCard.getSuit(), topCard.getValue());
+    }
+
+    void BotDraw()
+    {
+        cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
+        botHand.Add(topCard);
+        Bot.GetComponent<Hand>().addCard("Back", 0);
+    }
 }
