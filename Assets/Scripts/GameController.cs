@@ -55,13 +55,13 @@ public class GameController : MonoBehaviour
     void PlayerDraw() {
         cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
         playerHand.Add(topCard);
-        Player.GetComponent<Hand>().addCard(topCard.getSuit(), topCard.getValue());
+        Player.GetComponent<Hand>().addCard(topCard.getSuit(), topCard.getValue(), true);
     }
 
     void BotDraw() {
         cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
         botHand.Add(topCard);
-        Bot.GetComponent<Hand>().addCard("Back", 0);
+        Bot.GetComponent<Hand>().addCard("Back", 0, false);
     }
 
     void deckToPile() {

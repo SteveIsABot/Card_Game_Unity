@@ -171,7 +171,6 @@ MonoBehaviour:
   cardPrefab: {fileID: 3828215396161066312, guid: 9940b67a94cb2654aae9239e65c60708, type: 3}
   cards: []
   sizeToFill: 8
-  isBot: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,7 +543,6 @@ MonoBehaviour:
   cardPrefab: {fileID: 3828215396161066312, guid: 9940b67a94cb2654aae9239e65c60708, type: 3}
   cards: []
   sizeToFill: 8
-  isBot: 1
 --- !u!1 &1846592661
 GameObject:
   m_ObjectHideFlags: 0
