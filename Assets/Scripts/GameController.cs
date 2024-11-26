@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
     [SerializeField] public GameObject Player;
     [SerializeField] public GameObject Bot;
     [SerializeField] public GameObject Pile;
+    [SerializeField] public GameObject TextObj;
     private List<cardData> playerHand = new List<cardData>();
     private List<cardData> botHand = new List<cardData>();
     private Stack<cardData> pileCards = new Stack<cardData>();
@@ -30,6 +32,7 @@ public class GameController : MonoBehaviour
         Pile = GameObject.Find("Pile");
         Player = GameObject.Find("PlayerHand");
         Bot = GameObject.Find("BotHand");
+        TextObj = GameObject.Find("TurnText");
 
         Random.InitState((int)System.DateTime.Now.Ticks);
         Deck.GetComponent<Deck>().initDeck(false);
@@ -67,11 +70,14 @@ public class GameController : MonoBehaviour
     }
 
     void PlayersTurn() {
+        TextObj.GetComponent<TextMeshPro>().text = " \nPlayer Turn\n↓";
         Debug.Log("Players Turn");
     }
 
     IEnumerator BotsTurn() {
         
+        TextObj.GetComponent<TextMeshPro>().text = "↑\nOpponent Turn\n ";
+
         yield return new WaitForSeconds(3f);
 
         cardData topPileCard = pileCards.Peek();
