@@ -24,10 +24,8 @@ public class GameController : MonoBehaviour
     private List<cardData> playerHand = new List<cardData>();
     private List<cardData> botHand = new List<cardData>();
     private Stack<cardData> pileCards = new Stack<cardData>();
-    private GameState state;
 
     void Start() {
-        state = GameState.Start;
         Deck = GameObject.Find("Deck");
         Pile = GameObject.Find("Pile");
         Player = GameObject.Find("PlayerHand");
@@ -44,11 +42,9 @@ public class GameController : MonoBehaviour
         deckToPile();
 
         if(Random.Range(1, 100) % 2 == 1) {
-            state = GameState.PlayersTurn;
-            //PlayersTurn();
+            PlayersTurn();
         } else {
-            state = GameState.BotsTurn;
-            //BotsTurn();
+            StartCoroutine(BotsTurn());
         }
     }
 
@@ -71,10 +67,37 @@ public class GameController : MonoBehaviour
     }
 
     void PlayersTurn() {
-        if(state != GameState.PlayersTurn) return;
+        Debug.Log("Players Turn");
     }
 
-    void BotsTurn() {
-        if(state != GameState.BotsTurn) return;
+    IEnumerator BotsTurn() {
+        
+        yield return new WaitForSeconds(3f);
+
+        cardData topPileCard = pileCards.Peek();
+        bool playedCard = false;
+
+        for(int i = 0; i < botHand.Count; i++) {
+            
+            if(botHand[i].getSuit() == topPileCard.getSuit() || botHand[i].getValue() == topPileCard.getValue() ||
+               botHand[i].getSuit() == "Red" || botHand[i].getSuit() == "Black") {
+                
+                Bot.GetComponent<Hand>().removeCard("Back", 0);
+                Pile.GetComponent<Pile>().updateDisplay(botHand[i].getSuit(), botHand[i].getValue());
+
+                pileCards.Push(botHand[i]);
+                botHand.RemoveAt(i);
+                playedCard = true;
+                break;
+            }
+        }
+
+        if(!playedCard) BotDraw();
+        
+        if(botHand.Count <= 0) {
+            Debug.Log("You Lose");
+        } else {
+            PlayersTurn();
+        }
     }
 }

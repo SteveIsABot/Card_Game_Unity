@@ -29,4 +29,16 @@ public class Hand : MonoBehaviour
         newCard.GetComponent<Card>().updateMat();
         cards.Add(newCard);
     }
+
+    public void removeCard(string s, int v) {
+        
+        foreach(GameObject card in cards) {
+            Card c = card.GetComponent<Card>();
+            if(c.getSuit() == s || c.getValue() == v) {
+                cards.Remove(card);
+                Destroy(card);
+                break;
+            }
+        }
+    }
 }
