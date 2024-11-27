@@ -114,7 +114,23 @@ public class GameController : MonoBehaviour
     }
 
     public void PlayerCardClicked(string s, int v, bool players) {
+
         if(gameState != GameState.PlayersTurn) return;
-        if(players) Debug.Log(s + ", " + v);
+        if(!players) return;
+
+        cardData topCard = pileCards.Peek();
+        
+        if(topCard.getSuit() == s || topCard.getValue() == v || topCard.getValue() == 0) {
+
+                cardData cData = new cardData(s, v);
+                Player.GetComponent<Hand>().removeCard(s, v);
+                Pile.GetComponent<Pile>().updateDisplay(s, v);
+
+                pileCards.Push(cData);
+                playerHand.Remove(cData);
+
+                gameState = GameState.BotsTurn;
+                StartCoroutine(BotsTurn());
+        }
     }
 }
