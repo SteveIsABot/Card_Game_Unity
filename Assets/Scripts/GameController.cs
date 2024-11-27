@@ -15,6 +15,7 @@ public struct cardData {
 }
 
 public enum GameState { Start, PlayersTurn, BotsTurn, Win, Lose }
+public enum CardOwner { Players, Bots, Decks }
 
 public class GameController : MonoBehaviour
 {
@@ -58,13 +59,13 @@ public class GameController : MonoBehaviour
     void PlayerDraw() {
         cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
         playerHand.Add(topCard);
-        Player.GetComponent<Hand>().addCard(topCard.getSuit(), topCard.getValue(), true);
+        Player.GetComponent<Hand>().addCard(topCard.getSuit(), topCard.getValue(), CardOwner.Players);
     }
 
     void BotDraw() {
         cardData topCard = Deck.GetComponent<Deck>().drawTopCard();
         botHand.Add(topCard);
-        Bot.GetComponent<Hand>().addCard("Back", 0, false);
+        Bot.GetComponent<Hand>().addCard("Back", 0, CardOwner.Bots);
     }
 
     void deckToPile() {
@@ -113,10 +114,9 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void PlayerCardClicked(string s, int v, bool players) {
+    public void PlayerCardClicked(string s, int v) {
 
         if(gameState != GameState.PlayersTurn) return;
-        if(!players) return;
 
         cardData topCard = pileCards.Peek();
         
@@ -129,8 +129,22 @@ public class GameController : MonoBehaviour
                 pileCards.Push(cData);
                 playerHand.Remove(cData);
 
-                gameState = GameState.BotsTurn;
-                StartCoroutine(BotsTurn());
+                if(playerHand.Count <= 0) {
+                    gameState = GameState.Win;
+                    Debug.Log("You Win");
+                } else {
+                    gameState = GameState.BotsTurn;
+                    StartCoroutine(BotsTurn());
+                }
         }
+    }
+
+    public void PlayerClickedDeck() {
+
+        if(gameState != GameState.PlayersTurn) return;
+        PlayerDraw();
+
+        gameState = GameState.BotsTurn;
+        StartCoroutine(BotsTurn());
     }
 }

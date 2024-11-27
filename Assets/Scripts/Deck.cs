@@ -35,6 +35,8 @@ public class Deck : MonoBehaviour
         }
 
         Shuffle();
+        
+        displayCard.GetComponent<Card>().owner = CardOwner.Decks;
     }
 
     void Update() {

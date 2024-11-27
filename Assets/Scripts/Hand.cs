@@ -21,9 +21,9 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void addCard(string s, int v, bool players) {
+    public void addCard(string s, int v, CardOwner owner) {
         GameObject newCard = Instantiate(cardPrefab, transform);
-        newCard.GetComponent<Card>().isPlayers = players;
+        newCard.GetComponent<Card>().owner = owner;
         newCard.GetComponent<Card>().setSuit(s);
         newCard.GetComponent<Card>().setValue(v);
         newCard.GetComponent<Card>().updateMat();

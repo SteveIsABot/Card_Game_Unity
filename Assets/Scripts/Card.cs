@@ -14,10 +14,10 @@ public class Card : MonoBehaviour
     [SerializeField] private int value;
     [SerializeField] public GameObject textObj;
     private Material cardMat;
-    public bool isPlayers = false;
-    [SerializeField] private GameController gcF;
+    public CardOwner owner;
+    [SerializeField] private GameController gameControllerFunction;
     void Start() {
-        gcF = GameObject.Find("GameController").GetComponent<GameController>();
+        gameControllerFunction = GameObject.Find("GameController").GetComponent<GameController>();
         updateMat();
     }
 
@@ -56,7 +56,7 @@ public class Card : MonoBehaviour
 
     void OnMouseEnter() {
         
-        if(!isPlayers) { return; }
+        if(owner != CardOwner.Players) { return; }
 
         string conversion = "";
         conversion += value switch {
@@ -74,11 +74,12 @@ public class Card : MonoBehaviour
     }
 
     void OnMouseDown() {
-        gcF.PlayerCardClicked(suit, value, isPlayers);
+        if(owner == CardOwner.Players) gameControllerFunction.PlayerCardClicked(suit, value);
+        if(owner == CardOwner.Decks) gameControllerFunction.PlayerClickedDeck();
     }
 
     void OnMouseExit() {
-        if(!isPlayers) { return; }
+        if(owner != CardOwner.Players) { return; }
         foreach(Transform child in transform) Destroy(child.gameObject);
     }
 }

@@ -114,4 +114,5 @@ MonoBehaviour:
   suit: Back
   value: 0
   textObj: {fileID: 2928055307512972935, guid: b628cf069b268394ba671a2ce350076c, type: 3}
-  isPlayers: 0
+  owner: 2
+  gameControllerFunction: {fileID: 0}
