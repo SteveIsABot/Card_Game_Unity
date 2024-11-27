@@ -26,8 +26,10 @@ public class GameController : MonoBehaviour
     private List<cardData> playerHand = new List<cardData>();
     private List<cardData> botHand = new List<cardData>();
     private Stack<cardData> pileCards = new Stack<cardData>();
+    private GameState gameState;
 
     void Start() {
+        gameState = GameState.Start;
         Deck = GameObject.Find("Deck");
         Pile = GameObject.Find("Pile");
         Player = GameObject.Find("PlayerHand");
@@ -45,8 +47,10 @@ public class GameController : MonoBehaviour
         deckToPile();
 
         if(Random.Range(1, 100) % 2 == 1) {
+            gameState = GameState.PlayersTurn;
             PlayersTurn();
         } else {
+            gameState = GameState.BotsTurn;
             StartCoroutine(BotsTurn());
         }
     }
@@ -70,8 +74,8 @@ public class GameController : MonoBehaviour
     }
 
     void PlayersTurn() {
+        if(gameState != GameState.PlayersTurn) return;
         TextObj.GetComponent<TextMeshPro>().text = " \nPlayer Turn\n↓";
-        Debug.Log("Players Turn");
     }
 
     IEnumerator BotsTurn() {
@@ -101,9 +105,16 @@ public class GameController : MonoBehaviour
         if(!playedCard) BotDraw();
         
         if(botHand.Count <= 0) {
+            gameState = GameState.Lose;
             Debug.Log("You Lose");
         } else {
+            gameState = GameState.PlayersTurn;
             PlayersTurn();
         }
+    }
+
+    public void PlayerCardClicked(string s, int v, bool players) {
+        if(gameState != GameState.PlayersTurn) return;
+        if(players) Debug.Log(s + ", " + v);
     }
 }

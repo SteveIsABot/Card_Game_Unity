@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 
 public class Card : MonoBehaviour
@@ -13,7 +15,9 @@ public class Card : MonoBehaviour
     [SerializeField] public GameObject textObj;
     private Material cardMat;
     public bool isPlayers = false;
+    [SerializeField] private GameController gcF;
     void Start() {
+        gcF = GameObject.Find("GameController").GetComponent<GameController>();
         updateMat();
     }
 
@@ -67,6 +71,10 @@ public class Card : MonoBehaviour
         textObj.transform.position = new Vector3(0, 1.3f, 0f);
         textObj.GetComponent<TextMeshPro>().SetText(suit + " " + conversion);
         Instantiate(textObj, transform);
+    }
+
+    void OnMouseDown() {
+        gcF.PlayerCardClicked(suit, value, isPlayers);
     }
 
     void OnMouseExit() {
