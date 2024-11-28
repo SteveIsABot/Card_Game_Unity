@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
     [SerializeField] public GameObject cardPrefab;
     [SerializeField] private List<GameObject> cards = new List<GameObject>();
+    [SerializeField] private GameObject cardCounter;
     [SerializeField] public float sizeToFill;
 
     void Update() {
@@ -19,6 +21,8 @@ public class Hand : MonoBehaviour
             newPos.x += placeAmount;
             newPos.y += 0.01f;
         }
+
+        cardCounter.GetComponent<TextMeshPro>().text = cards.Count.ToString();
     }
 
     public void addCard(string s, int v, CardOwner owner) {
@@ -34,7 +38,7 @@ public class Hand : MonoBehaviour
         
         foreach(GameObject card in cards) {
             Card c = card.GetComponent<Card>();
-            if(c.getSuit() == s || c.getValue() == v) {
+            if(c.getSuit() == s && c.getValue() == v) {
                 cards.Remove(card);
                 Destroy(card);
                 break;
