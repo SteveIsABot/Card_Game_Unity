@@ -889,6 +889,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1720773314, guid: fd37a3f871275bc4997a3545dc4459e4, type: 3}
+      propertyPath: owner
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5308540082598403724, guid: fd37a3f871275bc4997a3545dc4459e4, type: 3}
       propertyPath: m_Name
       value: Pile

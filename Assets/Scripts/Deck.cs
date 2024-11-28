@@ -64,7 +64,7 @@ public class Deck : MonoBehaviour
 
     public cardData drawTopCard() {
         cardData topCard = cards[0];
-        cards.Remove(topCard);
+        cards.RemoveAt(0);
         return topCard;
     }
 

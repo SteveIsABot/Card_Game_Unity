@@ -15,7 +15,7 @@ public struct cardData {
 }
 
 public enum GameState { Start, PlayersTurn, BotsTurn, Win, Lose }
-public enum CardOwner { Players, Bots, Decks }
+public enum CardOwner { Players, Bots, Decks, Piles }
 
 public class GameController : MonoBehaviour
 {
@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
         TextObj = GameObject.Find("TurnText");
 
         Random.InitState((int)System.DateTime.Now.Ticks);
-        Deck.GetComponent<Deck>().initDeck(false);
+        Deck.GetComponent<Deck>().initDeck(true);
 
         for(int i = 0; i < 7; i++) {
             PlayerDraw();
@@ -90,8 +90,8 @@ public class GameController : MonoBehaviour
 
         for(int i = 0; i < botHand.Count; i++) {
             
-            if(botHand[i].getSuit() == topPileCard.getSuit() || botHand[i].getValue() == topPileCard.getValue() ||
-               botHand[i].getSuit() == "Red" || botHand[i].getSuit() == "Black") {
+            if(topPileCard.getValue() == 0 || botHand[i].getValue() == 0 ||
+               botHand[i].getSuit() == topPileCard.getSuit() || botHand[i].getValue() == topPileCard.getValue()) {
                 
                 Bot.GetComponent<Hand>().removeCard("Back", 0);
                 Pile.GetComponent<Pile>().updateDisplay(botHand[i].getSuit(), botHand[i].getValue());
@@ -120,7 +120,8 @@ public class GameController : MonoBehaviour
 
         cardData topCard = pileCards.Peek();
         
-        if(topCard.getSuit() == s || topCard.getValue() == v || topCard.getValue() == 0) {
+        if(topCard.getValue() == 0 || v == 0 ||
+           topCard.getSuit() == s || topCard.getValue() == v) {
 
                 cardData cData = new cardData(s, v);
                 Player.GetComponent<Hand>().removeCard(s, v);
