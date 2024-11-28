@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     [SerializeField] public GameObject Bot;
     [SerializeField] public GameObject Pile;
     [SerializeField] public GameObject TextObj;
+    [SerializeField] public bool playWithJokers = false;
     private List<cardData> playerHand = new List<cardData>();
     private List<cardData> botHand = new List<cardData>();
     private Stack<cardData> pileCards = new Stack<cardData>();
@@ -38,7 +39,7 @@ public class GameController : MonoBehaviour
         TextObj = GameObject.Find("TurnText");
 
         Random.InitState((int)System.DateTime.Now.Ticks);
-        Deck.GetComponent<Deck>().initDeck(true);
+        Deck.GetComponent<Deck>().initDeck(playWithJokers);
 
         for(int i = 0; i < 7; i++) {
             PlayerDraw();
