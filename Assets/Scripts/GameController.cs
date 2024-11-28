@@ -99,6 +99,9 @@ public class GameController : MonoBehaviour
                 Bot.GetComponent<Hand>().removeCard("Back", 0);
                 Pile.GetComponent<Pile>().updateDisplay(botHand[i].getSuit(), botHand[i].getValue());
 
+                if(botHand[i].getValue() == 2) for(int j = 0; j < 2; j++) PlayerDraw();
+                if(botHand[i].getValue() == 1 && botHand[i].getSuit() == "♥") for(int j = 0; j < 5; j++) PlayerDraw();
+
                 pileCards.Push(botHand[i]);
                 botHand.RemoveAt(i);
                 playedCard = true;
@@ -111,6 +114,9 @@ public class GameController : MonoBehaviour
         if(botHand.Count <= 0) {
             gameState = GameState.Lose;
             Debug.Log("You Lose");
+        } else if(playedCard && pileCards.Peek().getValue() == 8) {
+            gameState = GameState.BotsTurn;
+            StartCoroutine(BotsTurn());
         } else {
             gameState = GameState.PlayersTurn;
             PlayersTurn();
@@ -133,9 +139,15 @@ public class GameController : MonoBehaviour
                 pileCards.Push(cData);
                 playerHand.Remove(cData);
 
+                if(v == 2) for(int j = 0; j < 2; j++) BotDraw();
+                if(v == 1 && s == "♥") for(int j = 0; j < 5; j++) BotDraw();
+
                 if(playerHand.Count <= 0) {
                     gameState = GameState.Win;
                     Debug.Log("You Win");
+                } else if (v == 8) {
+                    gameState = GameState.PlayersTurn;
+                    PlayersTurn();
                 } else {
                     gameState = GameState.BotsTurn;
                     StartCoroutine(BotsTurn());
