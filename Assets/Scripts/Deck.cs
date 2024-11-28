@@ -40,12 +40,10 @@ public class Deck : MonoBehaviour
     }
 
     void Update() {
-        bool condition = cards.Count >= 1;
+        bool condition = cards.Count > 0;
+
         displayCard.SetActive(condition);
-        
-        if(condition) {
-            text.text = "Remaining:\n" + cards.Count;
-        }
+        text.text = "Remaining:\n" + cards.Count;
     }
 
     void Shuffle() {
@@ -75,6 +73,7 @@ public class Deck : MonoBehaviour
         Shuffle();
 
         pileCards.Push(topCard);
-        Debug.Log(pileCards.Count);
     }
+
+    public int sizeOfDeck() { return cards.Count; }
 }

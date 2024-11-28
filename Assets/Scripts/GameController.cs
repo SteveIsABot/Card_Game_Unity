@@ -76,11 +76,13 @@ public class GameController : MonoBehaviour
 
     void PlayersTurn() {
         if(gameState != GameState.PlayersTurn) return;
+        if(Deck.GetComponent<Deck>().sizeOfDeck() < 1) Deck.GetComponent<Deck>().Restock(pileCards);
         TextObj.GetComponent<TextMeshPro>().text = " \nPlayer Turn\n↓";
     }
 
     IEnumerator BotsTurn() {
         
+        if(Deck.GetComponent<Deck>().sizeOfDeck() < 1) Deck.GetComponent<Deck>().Restock(pileCards);
         TextObj.GetComponent<TextMeshPro>().text = "↑\nOpponent Turn\n ";
 
         yield return new WaitForSeconds(3f);
