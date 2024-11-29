@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public struct cardData {
     public string suit; public int value;
@@ -24,7 +25,6 @@ public class GameController : MonoBehaviour
     [SerializeField] public GameObject Bot;
     [SerializeField] public GameObject Pile;
     [SerializeField] public GameObject TextObj;
-    [SerializeField] public bool playWithJokers = false;
     private List<cardData> playerHand = new List<cardData>();
     private List<cardData> botHand = new List<cardData>();
     private Stack<cardData> pileCards = new Stack<cardData>();
@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         TextObj = GameObject.Find("TurnText");
 
         Random.InitState((int)System.DateTime.Now.Ticks);
-        Deck.GetComponent<Deck>().initDeck(playWithJokers);
+        Deck.GetComponent<Deck>().initDeck(CrossScene.initWithJokers);
 
         for(int i = 0; i < 7; i++) {
             PlayerDraw();
@@ -113,7 +113,8 @@ public class GameController : MonoBehaviour
         
         if(botHand.Count <= 0) {
             gameState = GameState.Lose;
-            Debug.Log("You Lose");
+            CrossScene.exitGameState = GameState.Lose;
+            SceneManager.LoadScene("MenuScene");
         } else if(playedCard && pileCards.Peek().getValue() == 8) {
             gameState = GameState.BotsTurn;
             StartCoroutine(BotsTurn());
@@ -144,7 +145,8 @@ public class GameController : MonoBehaviour
 
                 if(playerHand.Count <= 0) {
                     gameState = GameState.Win;
-                    Debug.Log("You Win");
+                    CrossScene.exitGameState = GameState.Win;
+                    SceneManager.LoadScene("MenuScene");
                 } else if (v == 8) {
                     gameState = GameState.PlayersTurn;
                     PlayersTurn();
