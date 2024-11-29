@@ -49,4 +49,3 @@ MonoBehaviour:
   Bot: {fileID: 0}
   Pile: {fileID: 0}
   TextObj: {fileID: 0}
-  playWithJokers: 0

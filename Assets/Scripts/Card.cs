@@ -68,7 +68,7 @@ public class Card : MonoBehaviour
             _ => value.ToString(),
         };
 
-        textObj.transform.position = new Vector3(0, 1.3f, 0f);
+        textObj.transform.position = new Vector3(0f, 1.0f, 0f);
         textObj.GetComponent<TextMeshPro>().SetText(suit + " " + conversion);
         Instantiate(textObj, transform);
     }
